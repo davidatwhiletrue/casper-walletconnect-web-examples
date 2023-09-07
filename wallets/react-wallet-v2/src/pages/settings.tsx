@@ -12,6 +12,7 @@ import { Fragment } from 'react'
 import { useSnapshot } from 'valtio'
 import packageJSON from '../../package.json'
 import { tezosWallets } from '@/utils/TezosWalletUtil'
+import { casperWallets } from '@/utils/CasperWalletUtil'
 
 export default function SettingsPage() {
   const {
@@ -22,7 +23,8 @@ export default function SettingsPage() {
     multiversxAddress,
     tronAddress,
     tezosAddress,
-    kadenaAddress
+    kadenaAddress,
+    casperAddress
   } = useSnapshot(SettingsStore.state)
 
   return (
@@ -51,7 +53,11 @@ export default function SettingsPage() {
         Testnets
       </Text>
       <Row justify="space-between" align="center">
-        <Switch checked={testNets} onChange={SettingsStore.toggleTestNets} data-testid="settings-toggle-testnets"/>
+        <Switch
+          checked={testNets}
+          onChange={SettingsStore.toggleTestNets}
+          data-testid="settings-toggle-testnets"
+        />
         <Text>{testNets ? 'Enabled' : 'Disabled'}</Text>
       </Row>
 
@@ -120,6 +126,13 @@ export default function SettingsPage() {
       </Text>
       <Card bordered borderWeight="light" css={{ wordWrap: 'break-word' }}>
         <Text css={{ fontFamily: '$mono' }}>{kadenaWallets[kadenaAddress].getSecretKey()}</Text>
+      </Card>
+
+      <Text h4 css={{ marginTop: '$10', marginBottom: '$5' }}>
+        Casper Secp256k1 Private Key
+      </Text>
+      <Card bordered borderWeight="light" css={{ wordWrap: 'break-word' }}>
+        <Text css={{ fontFamily: '$mono' }}>{casperWallets[casperAddress].getPrivKey()}</Text>
       </Card>
 
       <Text h4 css={{ marginTop: '$10', marginBottom: '$5' }}></Text>

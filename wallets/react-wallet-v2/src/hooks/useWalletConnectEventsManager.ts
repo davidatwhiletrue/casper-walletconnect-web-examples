@@ -14,6 +14,7 @@ import { NEAR_SIGNING_METHODS } from '@/data/NEARData'
 import { approveNearRequest } from '@/utils/NearRequestHandlerUtil'
 import { TEZOS_SIGNING_METHODS } from '@/data/TezosData'
 import { KADENA_SIGNING_METHODS } from '@/data/KadenaData'
+import { CASPER_SIGNING_METHODS } from '@/data/CASPERData'
 
 export default function useWalletConnectEventsManager(initialized: boolean) {
   /******************************************************************************
@@ -99,6 +100,9 @@ export default function useWalletConnectEventsManager(initialized: boolean) {
         case KADENA_SIGNING_METHODS.KADENA_SIGN:
         case KADENA_SIGNING_METHODS.KADENA_QUICKSIGN:
           return ModalStore.open('SessionSignKadenaModal', { requestEvent, requestSession })
+        case CASPER_SIGNING_METHODS.CASPER_SIGN_MESSAGE:
+        case CASPER_SIGNING_METHODS.CASPER_SIGN_DEPLOY:
+          return ModalStore.open('SessionSignCasperModal', { requestEvent, requestSession })
         default:
           return ModalStore.open('SessionUnsuportedMethodModal', { requestEvent, requestSession })
       }

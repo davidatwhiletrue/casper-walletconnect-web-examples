@@ -152,11 +152,19 @@ export function ClientContextProvider({
           "requiredNamespaces config for connect:",
           requiredNamespaces
         );
+        // const requiredNamespaces = {
+        //   casper: {
+        //     methods: ["casper_sign_message", "casper_sign_deploy"],
+        //     chains: ["casper:casper-test"],
+        //     events: [],
+        //   },
+        // };
         const optionalNamespaces = getOptionalNamespaces(chains);
         console.log(
           "optionalNamespaces config for connect:",
           optionalNamespaces
         );
+        // const optionalNamespaces = requiredNamespaces;
         const { uri, approval } = await client.connect({
           pairingTopic: pairing?.topic,
           requiredNamespaces,

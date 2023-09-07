@@ -20,6 +20,7 @@ import {
   DEFAULT_TRON_METHODS,
   DEFAULT_TEZOS_METHODS,
   DEFAULT_EIP155_OPTIONAL_METHODS,
+  DEFAULT_CASPER_METHODS,
 } from "../constants";
 import { AccountAction, setLocaleStorageTestnetFlag } from "../helpers";
 import Toggle from "../components/Toggle";
@@ -84,6 +85,7 @@ const Home: NextPage = () => {
     tronRpc,
     tezosRpc,
     kadenaRpc,
+    casperRpc,
     isRpcRequestPending,
     rpcResult,
     isTestnet,
@@ -388,6 +390,30 @@ const Home: NextPage = () => {
     ];
   };
 
+  const getCasperActions = (): AccountAction[] => {
+    const testSignMessage = async (chainId: string, address: string) => {
+      console.log("casper testSignMessage", chainId, address);
+      openRequestModal();
+      await casperRpc.testSignMessage(chainId, address);
+    };
+
+    const testSignTransaction = async (chainId: string, address: string) => {
+      openRequestModal();
+      await casperRpc.testSignTransaction(chainId, address);
+    };
+
+    return [
+      {
+        method: DEFAULT_CASPER_METHODS.CASPER_SIGN_MESSAGE,
+        callback: testSignMessage,
+      },
+      {
+        method: DEFAULT_CASPER_METHODS.CASPER_SIGN_DEPLOY,
+        callback: testSignTransaction,
+      },
+    ];
+  };
+
   const getBlockchainActions = (chainId: string) => {
     const [namespace] = chainId.split(":");
     switch (namespace) {
@@ -409,6 +435,8 @@ const Home: NextPage = () => {
         return getTezosActions();
       case "kadena":
         return getKadenaActions();
+      case "casper":
+        return getCasperActions();
       default:
         break;
     }
@@ -456,7 +484,6 @@ const Home: NextPage = () => {
 
   const renderContent = () => {
     const chainOptions = isTestnet ? DEFAULT_TEST_CHAINS : DEFAULT_MAIN_CHAINS;
-
     return !accounts.length && !Object.keys(balances).length ? (
       <SLanding center>
         <Banner />

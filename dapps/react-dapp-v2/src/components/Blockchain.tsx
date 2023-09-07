@@ -109,7 +109,9 @@ function getBlockchainDisplayData(
     return undefined;
   }
   const data: ChainData = chainData[namespace][reference];
-  if (typeof data === "undefined") return undefined;
+  if (typeof data === "undefined") {
+    return undefined;
+  }
   return { data, meta };
 }
 
@@ -127,7 +129,6 @@ const Blockchain: FC<PropsWithChildren<BlockchainProps>> = (
     actions,
   } = props;
   if (!Object.keys(chainData).length) return null;
-
   const chain = getBlockchainDisplayData(chainId, chainData);
 
   if (typeof chain === "undefined") return null;

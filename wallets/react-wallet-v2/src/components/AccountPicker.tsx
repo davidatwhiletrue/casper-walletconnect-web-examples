@@ -8,6 +8,7 @@ import { tronAddresses } from '@/utils/TronWalletUtil'
 import { tezosAddresses } from '@/utils/TezosWalletUtil'
 import { kadenaAddresses } from '@/utils/KadenaWalletUtil'
 import { useSnapshot } from 'valtio'
+import { casperAddresses } from '@/utils/CasperWalletUtil'
 
 export default function AccountPicker() {
   const { account } = useSnapshot(SettingsStore.state)
@@ -24,6 +25,7 @@ export default function AccountPicker() {
     SettingsStore.setTronAddress(tronAddresses[account])
     SettingsStore.setTezosAddress(tezosAddresses[account])
     SettingsStore.setKadenaAddress(kadenaAddresses[account])
+    SettingsStore.setCasperAddress(casperAddresses[account])
   }
 
   return (

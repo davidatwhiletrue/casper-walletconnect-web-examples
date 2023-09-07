@@ -97,6 +97,13 @@ export function isCosmosChain(chain: string) {
 }
 
 /**
+ * Check if chain is part of CASPER standard
+ */
+export function isCasperChain(chain: string) {
+  return chain.includes('casper')
+}
+
+/**
  * Check if chain is part of SOLANA standard
  */
 export function isSolanaChain(chain: string) {

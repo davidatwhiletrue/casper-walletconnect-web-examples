@@ -14,6 +14,7 @@ import SettingsStore from '@/store/SettingsStore'
 import { Text } from '@nextui-org/react'
 import { Fragment } from 'react'
 import { useSnapshot } from 'valtio'
+import { CASPER_MAINNET_CHAIN, CASPER_TEST_CHAIN } from '@/data/CASPERData'
 
 export default function HomePage() {
   const {
@@ -26,7 +27,8 @@ export default function HomePage() {
     multiversxAddress,
     tronAddress,
     tezosAddress,
-    kadenaAddress
+    kadenaAddress,
+    casperAddress
   } = useSnapshot(SettingsStore.state)
 
   return (
@@ -125,6 +127,17 @@ export default function HomePage() {
           data-testid={'chain-card-' + caip10.toString()}
         />
       ))}
+      {Object.entries(CASPER_MAINNET_CHAIN).map(([caip10, { name, logo, rgb }]) => (
+        <AccountCard
+          key={name}
+          name={name}
+          logo={logo}
+          rgb={rgb}
+          address={casperAddress}
+          chainId={caip10}
+          data-testid={'chain-card-' + caip10.toString()}
+        />
+      ))}
 
       {testNets ? (
         <Fragment>
@@ -215,6 +228,17 @@ export default function HomePage() {
               logo={logo}
               rgb={rgb}
               address={kadenaAddress}
+              chainId={caip10}
+              data-testid={'chain-card-' + caip10.toString()}
+            />
+          ))}
+          {Object.entries(CASPER_TEST_CHAIN).map(([caip10, { name, logo, rgb }]) => (
+            <AccountCard
+              key={name}
+              name={name}
+              logo={logo}
+              rgb={rgb}
+              address={casperAddress}
               chainId={caip10}
               data-testid={'chain-card-' + caip10.toString()}
             />

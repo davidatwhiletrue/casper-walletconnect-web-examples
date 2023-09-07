@@ -11,6 +11,7 @@ import { createSignClient, signClient } from '@/utils/WalletConnectUtil'
 import { createOrRestoreKadenaWallet } from '@/utils/KadenaWalletUtil'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSnapshot } from 'valtio'
+import { createOrRestoreCasperWallet } from '@/utils/CasperWalletUtil'
 
 export default function useInitialization() {
   const [initialized, setInitialized] = useState(false)
@@ -29,6 +30,7 @@ export default function useInitialization() {
       const { tronAddresses } = await createOrRestoreTronWallet()
       const { tezosAddresses } = await createOrRestoreTezosWallet()
       const { kadenaAddresses } = await createOrRestoreKadenaWallet()
+      const { casperAddresses } = await createOrRestoreCasperWallet()
 
       SettingsStore.setEIP155Address(eip155Addresses[0])
       SettingsStore.setCosmosAddress(cosmosAddresses[0])
@@ -39,6 +41,7 @@ export default function useInitialization() {
       SettingsStore.setTronAddress(tronAddresses[0])
       SettingsStore.setTezosAddress(tezosAddresses[0])
       SettingsStore.setKadenaAddress(kadenaAddresses[0])
+      SettingsStore.setCasperAddress(casperAddresses[0])
       await createSignClient(relayerRegionURL)
       setInitialized(true)
     } catch (err: unknown) {

@@ -19,7 +19,8 @@ import {
   isTronChain,
   isTezosChain,
   isKadenaChain,
-  styledToast
+  styledToast,
+  isCasperChain
 } from '@/utils/HelperUtil'
 import { solanaAddresses } from '@/utils/SolanaWalletUtil'
 import { signClient } from '@/utils/WalletConnectUtil'
@@ -29,6 +30,7 @@ import { getSdkError, mergeArrays } from '@walletconnect/utils'
 import { Fragment, useEffect, useState } from 'react'
 import { nearAddresses } from '@/utils/NearWalletUtil'
 import { kadenaAddresses } from '@/utils/KadenaWalletUtil'
+import { casperAddresses } from '@/utils/CasperWalletUtil'
 
 export default function SessionProposalModal() {
   const [selectedAccounts, setSelectedAccounts] = useState<Record<string, string[]>>({})
@@ -226,6 +228,16 @@ export default function SessionProposalModal() {
       return (
         <ProposalSelectSection
           addresses={kadenaAddresses}
+          selectedAddresses={selectedAccounts[chain]}
+          onSelect={onSelectAccount}
+          chain={chain}
+          isRequired={required}
+        />
+      )
+    } else if (isCasperChain(chain)) {
+      return (
+        <ProposalSelectSection
+          addresses={casperAddresses}
           selectedAddresses={selectedAccounts[chain]}
           onSelect={onSelectAccount}
           chain={chain}

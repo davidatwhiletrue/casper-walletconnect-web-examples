@@ -49,6 +49,7 @@ import {
   DEFAULT_TEZOS_METHODS,
   DEFAULT_KADENA_METHODS,
   DEFAULT_EIP155_OPTIONAL_METHODS,
+  DEFAULT_CASPER_METHODS,
 } from "../constants";
 import { useChainData } from "./ChainDataContext";
 import { rpcProvidersByChainId } from "../../src/helpers/api";
@@ -61,7 +62,7 @@ import {
   SignableMessage,
 } from "@multiversx/sdk-core";
 import { UserVerifier } from "@multiversx/sdk-wallet/out/userVerifier";
-import { SignClient } from "@walletconnect/sign-client/dist/types/client";
+import { CasperClient, DeployUtil, CLPublicKey } from "casper-js-sdk";
 
 /**
  * Types
@@ -123,6 +124,10 @@ interface IContext {
     testGetAccounts: TRpcRequestCallback;
     testSign: TRpcRequestCallback;
     testQuicksign: TRpcRequestCallback;
+  };
+  casperRpc: {
+    testSignMessage: TRpcRequestCallback;
+    testSignTransaction: TRpcRequestCallback;
   };
   rpcResult?: IFormattedRpcResponse | null;
   isRpcRequestPending: boolean;
@@ -1484,6 +1489,97 @@ export function JsonRpcContextProvider({
     ),
   };
 
+  // -------- CASPER RPC METHODS --------
+  const casperRpc = {
+    testSignMessage: _createJsonRpcRequestHandler(
+      async (
+        chainId: string,
+        address: string
+      ): Promise<IFormattedRpcResponse> => {
+        const method = DEFAULT_CASPER_METHODS.CASPER_SIGN_MESSAGE;
+        // Encode message to `UInt8Array` first via `TextEncoder` so we can pass it to `bs58.encode`.
+        const message = bs58.encode(
+          new TextEncoder().encode(
+            `This is an example message to be signed - ${Date.now()}`
+          )
+        );
+
+        try {
+          const result = await client!.request<{ signature: string }>({
+            chainId,
+            topic: session!.topic,
+            request: {
+              method,
+              params: {
+                message,
+                address,
+              },
+            },
+          });
+
+          // TODO: verify signature
+          const valid = true;
+
+          return {
+            method,
+            address,
+            valid,
+            result: result.signature,
+          };
+        } catch (error: any) {
+          throw new Error(error);
+        }
+      }
+    ),
+    testSignTransaction: _createJsonRpcRequestHandler(
+      async (
+        chainId: string,
+        address: string
+      ): Promise<IFormattedRpcResponse> => {
+        const method = DEFAULT_CASPER_METHODS.CASPER_SIGN_DEPLOY;
+        const recipientAddress =
+          "0106ca7c39cd272dbf21a86eeb3b36b7c26e2e9b94af64292419f7862936bca2ca";
+        const nodeAddress = chainId.includes("casper-test")
+          ? "https://limitless-fortress-93850-88d6ee7d4a49.herokuapp.com/http://52.35.59.254:7777/rpc"
+          : "https://limitless-fortress-93850-88d6ee7d4a49.herokuapp.com/http://52.35.59.254:7777/rpc";
+        const chainName = chainId.includes("casper-test")
+          ? "casper-test"
+          : "casper";
+        const casperClient = new CasperClient(nodeAddress);
+        const transferDeploy = casperClient.makeTransferDeploy(
+          new DeployUtil.DeployParams(CLPublicKey.fromHex(address), chainName),
+          DeployUtil.ExecutableDeployItem.newTransfer(
+            "2500000000",
+            CLPublicKey.fromHex(recipientAddress),
+            null,
+            1
+          ),
+          DeployUtil.standardPayment(100000000)
+        );
+        const result = await client!.request({
+          topic: session!.topic,
+          chainId,
+          request: {
+            method,
+            params: {
+              deploy: DeployUtil.deployToJson(transferDeploy),
+              address,
+            },
+          },
+        });
+
+        const signedDeploy = DeployUtil.deployFromJson(result).unwrap();
+        const hash = await casperClient.putDeploy(signedDeploy);
+        return {
+          method,
+          address,
+          valid: true,
+          result: JSON.stringify({ hash }),
+        };
+      }
+    ),
+  };
+
   return (
     <JsonRpcContext.Provider
       value={{
@@ -1497,6 +1593,7 @@ export function JsonRpcContextProvider({
         tronRpc,
         tezosRpc,
         kadenaRpc,
+        casperRpc,
         rpcResult: result,
         isRpcRequestPending: pending,
         isTestnet,

@@ -19,6 +19,7 @@ export const DEFAULT_MAIN_CHAINS = [
   "tron:0x2b6653dc",
   "tezos:mainnet",
   "kadena:mainnet01",
+  "casper:casper",
 ];
 
 export const DEFAULT_TEST_CHAINS = [
@@ -36,6 +37,7 @@ export const DEFAULT_TEST_CHAINS = [
   "tron:0xcd8690dc",
   "tezos:testnet",
   "kadena:testnet04",
+  "casper:casper-test",
 ];
 
 export const DEFAULT_CHAINS = [...DEFAULT_MAIN_CHAINS, ...DEFAULT_TEST_CHAINS];
@@ -168,6 +170,15 @@ export enum DEFAULT_KADENA_METHODS {
 }
 
 export enum DEFAULT_KADENA_EVENTS {}
+
+/**CASPER
+ */
+export enum DEFAULT_CASPER_METHODS {
+  CASPER_SIGN_MESSAGE = "casper_sign_message",
+  CASPER_SIGN_DEPLOY = "casper_sign_deploy",
+}
+
+export enum DEFAULT_CASPER_EVENTS {}
 
 export const REGIONALIZED_RELAYER_ENDPOINTS: RelayerType[] = [
   {
