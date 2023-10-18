@@ -5,7 +5,7 @@ import { SessionTypes } from "@walletconnect/types";
 import { fonts, responsive } from "../styles";
 import Button from "./Button";
 import Icon from "./Icon";
-import { DEFAULT_GITHUB_REPO_URL } from "../constants";
+import Column from "./Column";
 
 const SHeader = styled.div`
   margin-top: -1px;
@@ -65,7 +65,7 @@ const Header = (props: HeaderProps) => {
   return (
     <SHeader {...props}>
       {session ? (
-        <>
+        <Column>
           <SActiveSession>
             <p>{`Connected to`}</p>
             <p>{session.peer.metadata.name}</p>
@@ -73,11 +73,11 @@ const Header = (props: HeaderProps) => {
           <SHeaderActions>
             <GithubLogoContainer>
               <a
-                href={DEFAULT_GITHUB_REPO_URL}
+                href={'https://cspr.click'}
                 target="_blank"
                 rel="noreferrer"
               >
-                <Icon size={24} src={"/assets/githubLogo.svg"} />
+                <Icon size={24} src={"https://cspr.click/wp-content/uploads/2023/06/favico.svg"} />
               </a>
             </GithubLogoContainer>
             <Button outline color="black" onClick={ping}>
@@ -90,7 +90,7 @@ const Header = (props: HeaderProps) => {
               {"Disconnect"}
             </Button>
           </SHeaderActions>
-        </>
+        </Column>
       ) : null}
     </SHeader>
   );

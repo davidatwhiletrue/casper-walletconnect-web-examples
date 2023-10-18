@@ -1,23 +1,7 @@
 import { ProposalTypes } from "@walletconnect/types";
 import {
-  DEFAULT_COSMOS_EVENTS,
-  DEFAULT_COSMOS_METHODS,
   DEFAULT_EIP155_METHODS,
   DEFAULT_EIP_155_EVENTS,
-  DEFAULT_SOLANA_EVENTS,
-  DEFAULT_SOLANA_METHODS,
-  DEFAULT_POLKADOT_EVENTS,
-  DEFAULT_POLKADOT_METHODS,
-  DEFAULT_NEAR_METHODS,
-  DEFAULT_NEAR_EVENTS,
-  DEFAULT_KADENA_METHODS,
-  DEFAULT_KADENA_EVENTS,
-  DEFAULT_MULTIVERSX_EVENTS,
-  DEFAULT_MULTIVERSX_METHODS,
-  DEFAULT_TRON_METHODS,
-  DEFAULT_TRON_EVENTS,
-  DEFAULT_TEZOS_METHODS,
-  DEFAULT_TEZOS_EVENTS,
   DEFAULT_EIP155_OPTIONAL_METHODS,
   DEFAULT_CASPER_METHODS,
   DEFAULT_CASPER_EVENTS,
@@ -39,22 +23,6 @@ export const getSupportedRequiredMethodsByNamespace = (namespace: string) => {
   switch (namespace) {
     case "eip155":
       return Object.values(DEFAULT_EIP155_METHODS);
-    case "cosmos":
-      return Object.values(DEFAULT_COSMOS_METHODS);
-    case "solana":
-      return Object.values(DEFAULT_SOLANA_METHODS);
-    case "polkadot":
-      return Object.values(DEFAULT_POLKADOT_METHODS);
-    case "near":
-      return Object.values(DEFAULT_NEAR_METHODS);
-    case "mvx":
-      return Object.values(DEFAULT_MULTIVERSX_METHODS);
-    case "tron":
-      return Object.values(DEFAULT_TRON_METHODS);
-    case "tezos":
-      return Object.values(DEFAULT_TEZOS_METHODS);
-    case "kadena":
-      return Object.values(DEFAULT_KADENA_METHODS);
     case "casper":
       return Object.values(DEFAULT_CASPER_METHODS);
     default:
@@ -68,14 +36,6 @@ export const getSupportedOptionalMethodsByNamespace = (namespace: string) => {
   switch (namespace) {
     case "eip155":
       return Object.values(DEFAULT_EIP155_OPTIONAL_METHODS);
-    case "cosmos":
-    case "solana":
-    case "polkadot":
-    case "near":
-    case "mvx":
-    case "tron":
-    case "tezos":
-    case "kadena":
     case "casper":
       return [];
     default:
@@ -89,22 +49,6 @@ export const getSupportedEventsByNamespace = (namespace: string) => {
   switch (namespace) {
     case "eip155":
       return Object.values(DEFAULT_EIP_155_EVENTS);
-    case "cosmos":
-      return Object.values(DEFAULT_COSMOS_EVENTS);
-    case "solana":
-      return Object.values(DEFAULT_SOLANA_EVENTS);
-    case "polkadot":
-      return Object.values(DEFAULT_POLKADOT_EVENTS);
-    case "near":
-      return Object.values(DEFAULT_NEAR_EVENTS);
-    case "mvx":
-      return Object.values(DEFAULT_MULTIVERSX_EVENTS);
-    case "tron":
-      return Object.values(DEFAULT_TRON_EVENTS);
-    case "tezos":
-      return Object.values(DEFAULT_TEZOS_EVENTS);
-    case "kadena":
-      return Object.values(DEFAULT_KADENA_EVENTS);
     case "casper":
       return Object.values(DEFAULT_CASPER_EVENTS);
     default:

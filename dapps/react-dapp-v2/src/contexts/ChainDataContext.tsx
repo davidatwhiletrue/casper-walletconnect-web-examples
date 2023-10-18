@@ -5,17 +5,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import { SolanaChainData } from "../chains/solana";
-import { PolkadotChainData } from "../chains/polkadot";
-import { MultiversxChainData } from "../chains/multiversx";
-import { TronChainData } from "../chains/tron";
 
 import { ChainNamespaces, ChainsMap, getAllChainNamespaces } from "../helpers";
-import { NearChainData } from "../chains/near";
-import { CosmosChainData } from "../chains/cosmos";
 import { EIP155ChainData } from "../chains/eip155";
-import { TezosChainData } from "../chains/tezos";
-import { KadenaChainData } from "../chains/kadena";
 import { CasperChainData } from "../chains/casper";
 
 /**
@@ -47,32 +39,8 @@ export function ChainDataContextProvider({
       namespaces.map(async (namespace) => {
         let chains: ChainsMap | undefined;
         switch (namespace) {
-          case "solana":
-            chains = SolanaChainData;
-            break;
-          case "polkadot":
-            chains = PolkadotChainData;
-            break;
-          case "near":
-            chains = NearChainData;
-            break;
-          case "mvx":
-            chains = MultiversxChainData;
-            break;
-          case "tron":
-            chains = TronChainData;
-            break;
-          case "cosmos":
-            chains = CosmosChainData;
-            break;
           case "eip155":
             chains = EIP155ChainData;
-            break;
-          case "tezos":
-            chains = TezosChainData;
-            break;
-          case "kadena":
-            chains = KadenaChainData;
             break;
           case "casper":
             chains = CasperChainData;

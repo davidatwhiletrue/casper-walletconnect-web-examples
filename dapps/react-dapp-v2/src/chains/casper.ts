@@ -9,10 +9,12 @@ import {
 
 export const CasperMetadata: NamespaceMetadata = {
   casper: {
+    name: "Casper Mainnet 1",
     logo: "https://backend.casper.network/assets/8091a091-5089-4359-b2f0-1f86b84fb7d3",
     rgb: "27, 31, 53",
   },
   "casper-test": {
+    name: "Casper Testnet 1",
     logo: "https://backend.casper.network/assets/8091a091-5089-4359-b2f0-1f86b84fb7d3",
     rgb: "27, 31, 53",
   },
