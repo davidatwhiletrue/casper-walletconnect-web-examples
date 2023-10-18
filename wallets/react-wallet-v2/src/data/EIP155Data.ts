@@ -19,13 +19,6 @@ export const EIP155_MAINNET_CHAINS = {
     rgb: '99, 125, 234',
     rpc: 'https://cloudflare-eth.com/'
   },
-  'eip155:43114': {
-    chainId: 43114,
-    name: 'Avalanche C-Chain',
-    logo: '/chain-logos/eip155-43113.png',
-    rgb: '232, 65, 66',
-    rpc: 'https://api.avax.network/ext/bc/C/rpc'
-  },
   'eip155:137': {
     chainId: 137,
     name: 'Polygon',
@@ -33,20 +26,6 @@ export const EIP155_MAINNET_CHAINS = {
     rgb: '130, 71, 229',
     rpc: 'https://polygon-rpc.com/'
   },
-  'eip155:10': {
-    chainId: 10,
-    name: 'Optimism',
-    logo: '/chain-logos/eip155-10.png',
-    rgb: '235, 0, 25',
-    rpc: 'https://mainnet.optimism.io'
-  },
-  'eip155:324': {
-    chainId: 324,
-    name: 'zkSync Era',
-    logo: '/chain-logos/eip155-324.svg',
-    rgb: '242, 242, 242',
-    rpc: 'https://mainnet.era.zksync.io/'
-  }
 }
 
 export const EIP155_TEST_CHAINS = {
@@ -57,13 +36,6 @@ export const EIP155_TEST_CHAINS = {
     rgb: '99, 125, 234',
     rpc: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
   },
-  'eip155:43113': {
-    chainId: 43113,
-    name: 'Avalanche Fuji',
-    logo: '/chain-logos/eip155-43113.png',
-    rgb: '232, 65, 66',
-    rpc: 'https://api.avax-test.network/ext/bc/C/rpc'
-  },
   'eip155:80001': {
     chainId: 80001,
     name: 'Polygon Mumbai',
@@ -71,20 +43,6 @@ export const EIP155_TEST_CHAINS = {
     rgb: '130, 71, 229',
     rpc: 'https://matic-mumbai.chainstacklabs.com'
   },
-  'eip155:420': {
-    chainId: 420,
-    name: 'Optimism Goerli',
-    logo: '/chain-logos/eip155-10.png',
-    rgb: '235, 0, 25',
-    rpc: 'https://goerli.optimism.io'
-  },
-  'eip155:280': {
-    chainId: 280,
-    name: 'zkSync Era Testnet',
-    logo: '/chain-logos/eip155-324.svg',
-    rgb: '242, 242, 242',
-    rpc: 'https://testnet.era.zksync.dev/'
-  }
 }
 
 export const EIP155_CHAINS = { ...EIP155_MAINNET_CHAINS, ...EIP155_TEST_CHAINS }

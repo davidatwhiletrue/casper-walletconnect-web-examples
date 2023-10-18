@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "[ -e .env ] && set -a && . ./.env; next start -p 9000",
     "lint": "next lint",
     "prettier:write": "prettier --write '**/*.{js,ts,jsx,tsx}'"
   },

@@ -18,14 +18,6 @@ interface State {
     | 'SessionSignTypedDataModal'
     | 'SessionSendTransactionModal'
     | 'SessionUnsuportedMethodModal'
-    | 'SessionSignCosmosModal'
-    | 'SessionSignSolanaModal'
-    | 'SessionSignPolkadotModal'
-    | 'SessionSignNearModal'
-    | 'SessionSignMultiversxModal'
-    | 'SessionSignTronModal'
-    | 'SessionSignTezosModal'
-    | 'SessionSignKadenaModal'
     | 'SessionSignCasperModal'
   data?: ModalData
 }

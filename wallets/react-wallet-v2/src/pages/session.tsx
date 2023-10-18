@@ -95,24 +95,6 @@ export default function SessionPage() {
   //         chain={chain}
   //       />
   //     )
-  //   } else if (isCosmosChain(chain)) {
-  //     return (
-  //       <ProposalSelectSection
-  //         addresses={cosmosAddresses}
-  //         selectedAddresses={selectedAccounts[chain]}
-  //         onSelect={onSelectAccount}
-  //         chain={chain}
-  //       />
-  //     )
-  //   } else if (isSolanaChain(chain)) {
-  //     return (
-  //       <ProposalSelectSection
-  //         addresses={solanaAddresses}
-  //         selectedAddresses={selectedAccounts[chain]}
-  //         onSelect={onSelectAccount}
-  //         chain={chain}
-  //       />
-  //     )
   //   }
   // }
 
