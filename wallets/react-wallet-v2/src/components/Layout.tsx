@@ -70,8 +70,7 @@ export default function Layout({ children, initialized }: Props) {
                 position: 'sticky',
                 justifyContent: 'flex-end',
                 alignItems: 'flex-end',
-                boxShadow: '0 -30px 20px #111111',
-                backgroundColor: '#111111',
+                backgroundColor: '#f0f0f0',
                 zIndex: 200,
                 bottom: 0,
                 left: 0

@@ -8,9 +8,6 @@ interface State {
   testNets: boolean
   account: number
   eip155Address: string
-  cosmosAddress: string
-  nearAddress: string
-  tronAddress: string
   casperAddress: string
   relayerRegionURL: string
   activeChainId: string

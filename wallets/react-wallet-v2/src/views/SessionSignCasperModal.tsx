@@ -4,86 +4,97 @@ import RequesDetailsCard from '@/components/RequestDetalilsCard'
 import RequestMethodCard from '@/components/RequestMethodCard'
 import RequestModalContainer from '@/components/RequestModalContainer'
 import ModalStore from '@/store/ModalStore'
-import { approveCasperRequest, rejectCaspperRequest } from '@/utils/CasperRequestHandler'
-import { styledToast } from '@/utils/HelperUtil'
-import { signClient } from '@/utils/WalletConnectUtil'
-import { Button, Divider, Modal, Text } from '@nextui-org/react'
-import { Fragment } from 'react'
+import {approveCasperRequest, rejectCaspperRequest} from '@/utils/CasperRequestHandler'
+import {styledToast} from '@/utils/HelperUtil'
+import {signClient} from '@/utils/WalletConnectUtil'
+import {Button, Collapse, Divider, Modal, Text} from '@nextui-org/react'
+import {Fragment} from 'react'
+import RequestDeployCard from "@/components/RequestDeployCard";
+
 
 export default function SessionSignCasperModal() {
-  // Get request and wallet data from store
-  const requestEvent = ModalStore.state.data?.requestEvent
-  const requestSession = ModalStore.state.data?.requestSession
+    // Get request and wallet data from store
+    const requestEvent = ModalStore.state.data?.requestEvent
+    const requestSession = ModalStore.state.data?.requestSession
 
-  // Ensure request and wallet are defined
-  if (!requestEvent || !requestSession) {
-    return <Text>Missing request data</Text>
-  }
-
-  // Get required request data
-  const { topic, params } = requestEvent
-  const { chainId, request } = params
-
-  // Handle approve action (logic varies based on request method)
-  async function onApprove() {
-    if (requestEvent) {
-      const response = await approveCasperRequest(requestEvent)
-      try {
-        await signClient.respond({
-          topic,
-          response
-        })
-      } catch (e) {
-        styledToast((e as Error).message, 'error')
-        return
-      }
-      ModalStore.close()
+    // Ensure request and wallet are defined
+    if (!requestEvent || !requestSession) {
+        return <Text>Missing request data</Text>
     }
-  }
 
-  // Handle reject action
-  async function onReject() {
-    if (requestEvent) {
-      const response = rejectCaspperRequest(requestEvent)
-      try {
-        await signClient.respond({
-          topic,
-          response
-        })
-      } catch (e) {
-        styledToast((e as Error).message, 'error')
-        return
-      }
-      ModalStore.close()
+    // Get required request data
+    const {topic, params} = requestEvent
+    const {chainId, request} = params
+
+    // Handle approve action (logic varies based on request method)
+    async function onApprove() {
+        if (requestEvent) {
+            const response = await approveCasperRequest(requestEvent)
+            try {
+                await signClient.respond({
+                    topic,
+                    response
+                })
+            } catch (e) {
+                styledToast((e as Error).message, 'error')
+                return
+            }
+            ModalStore.close()
+        }
     }
-  }
 
-  return (
-    <Fragment>
-      <RequestModalContainer title="Sign Message">
-        <ProjectInfoCard metadata={requestSession.peer.metadata} />
+    // Handle reject action
+    async function onReject() {
+        if (requestEvent) {
+            const response = rejectCaspperRequest(requestEvent)
+            try {
+                await signClient.respond({
+                    topic,
+                    response
+                })
+            } catch (e) {
+                styledToast((e as Error).message, 'error')
+                return
+            }
+            ModalStore.close()
+        }
+    }
 
-        <Divider y={2} />
+    return (
+        <Fragment>
+            <RequestModalContainer title="Sign Message">
+                <ProjectInfoCard metadata={requestSession.peer.metadata}/>
 
-        <RequesDetailsCard chains={[chainId ?? '']} protocol={requestSession.relay.protocol} />
+                <Divider y={2}/>
 
-        <Divider y={2} />
+                <RequesDetailsCard chains={[chainId ?? '']} protocol={requestSession.relay.protocol}/>
 
-        <RequestDataCard data={params} />
+                <Divider y={2}/>
 
-        <Divider y={2} />
+                <RequestDeployCard deploy={params}/>
 
-        <RequestMethodCard methods={[request.method]} />
-      </RequestModalContainer>
+                <Divider y={2}/>
 
-      <Modal.Footer>
-        <Button auto flat color="error" onClick={onReject}>
-          Reject
-        </Button>
-        <Button auto flat color="success" onClick={onApprove}>
-          Approve
-        </Button>
-      </Modal.Footer>
-    </Fragment>
-  )
+                <RequestMethodCard methods={[request.method]}/>
+
+                <Divider y={2}/>
+
+                <Collapse.Group css={{padding: 0}}>
+                    <Collapse title="Raw request data" css={{h3: {fontSize: 'var(--nextui-fontSizes-base);'}}}>
+                        <RequestDataCard data={params}/>
+                    </Collapse>
+                </Collapse.Group>
+
+            </RequestModalContainer>
+
+            <Modal.Footer>
+                <Button auto flat color="error" onClick={onReject}>
+                    Reject
+                </Button>
+                <Button auto flat color="success" onClick={onApprove}>
+                    Approve
+                </Button>
+            </Modal.Footer>
+        </Fragment>
+    )
 }

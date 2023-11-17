@@ -7,10 +7,10 @@ export async function createSignClient(relayerRegionURL: string) {
     projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
     relayUrl: relayerRegionURL ?? process.env.NEXT_PUBLIC_RELAY_URL,
     metadata: {
-      name: 'React Wallet',
-      description: 'React Wallet for WalletConnect',
+      name: 'WC Demo wallet 1 for Casper',
+      description: 'Casper Demo Wallet 1 for WalletConnect',
       url: 'https://walletconnect.com/',
-      icons: ['https://avatars.githubusercontent.com/u/37784886']
+      icons: ['http://david.whiletrue.pro/click-logo-rev.png']
     }
   })
 

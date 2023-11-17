@@ -21,7 +21,7 @@ export default function PageHeader({ title, children }: Props) {
             h3
             weight="bold"
             css={{
-              textGradient: '90deg, $secondary, $primary 30%'
+              color: 'red',
             }}
           >
             {title}

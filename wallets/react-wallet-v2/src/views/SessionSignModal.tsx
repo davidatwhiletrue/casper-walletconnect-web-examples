@@ -87,10 +87,10 @@ export default function SessionSignModal() {
 
       <Modal.Footer>
         <Button auto flat color="error" onClick={onReject} data-testid="request-button-reject">
-          Reject
+          Reject1
         </Button>
         <Button auto flat color="success" onClick={onApprove} data-testid="request-button-approve">
-          Approve
+          Approve1
         </Button>
       </Modal.Footer>
     </Fragment>

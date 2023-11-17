@@ -64,7 +64,7 @@ export default function QrReader({ onConnect }: IProps) {
             className="qrIcon"
           />
           <Button
-            color="gradient"
+            color="primary"
             css={{ marginTop: '$10', width: '100%' }}
             onClick={onShowScanner}
             data-testid="qrcode-button"  
