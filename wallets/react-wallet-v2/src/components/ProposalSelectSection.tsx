@@ -25,7 +25,7 @@ export default function ProposalSelectSection({
   return (
     <Row>
       <Col>
-        <Text h4 css={{ marginTop: '$5' }}>{`Choose ${chain} accounts`}</Text>
+        <Text h4 css={{ marginTop: '$5' }}>{`Select account(s)`}</Text>
         {addresses.map((address, index) => (
           <AccountSelectCard
             key={address}

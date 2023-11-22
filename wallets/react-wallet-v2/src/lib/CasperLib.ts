@@ -20,7 +20,7 @@ export default class CasperLib {
     this.keyPair = keyPair
   }
 
-  static async init({ privateKey }: IInitArguments) {
+  static init({ privateKey }: IInitArguments) {
     privateKey = privateKey ? privateKey : insecureRandomKeyHex(64)
     const privateKeyBuffer = Keys.Secp256K1.parsePrivateKey(
       Uint8Array.from(Buffer.from(privateKey || '', 'hex')),
@@ -37,7 +37,7 @@ export default class CasperLib {
     return Buffer.from(this.keyPair.privateKey).toString('hex')
   }
 
-  public async getAddress() {
+  public getAddress() {
     return this.keyPair.accountHex()
   }
 

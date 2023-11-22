@@ -19,7 +19,7 @@ let address6: string
 /**
  * Utilities
  */
-export async function createOrRestoreCasperWallet() {
+export function createOrRestoreCasperWallet() {
   const privateKey1 = localStorage.getItem('CASPER_PRIVATE_KEY_1')
   const privateKey2 = localStorage.getItem('CASPER_PRIVATE_KEY_2')
   const privateKey3 = localStorage.getItem('CASPER_PRIVATE_KEY_3')
@@ -28,19 +28,19 @@ export async function createOrRestoreCasperWallet() {
   const privateKey6 = localStorage.getItem('CASPER_PRIVATE_KEY_6')
 
   if (privateKey1 && privateKey2 && privateKey3 && privateKey4 && privateKey5 && privateKey6) {
-    wallet1 = await CasperLib.init({ privateKey: privateKey1 })
-    wallet2 = await CasperLib.init({ privateKey: privateKey2 })
-    wallet3 = await CasperLib.init({ privateKey: privateKey3 })
-    wallet4 = await CasperLib.init({ privateKey: privateKey4 })
-    wallet5 = await CasperLib.init({ privateKey: privateKey5 })
-    wallet6 = await CasperLib.init({ privateKey: privateKey6 })
+    wallet1 = CasperLib.init({ privateKey: privateKey1 })
+    wallet2 = CasperLib.init({ privateKey: privateKey2 })
+    wallet3 = CasperLib.init({ privateKey: privateKey3 })
+    wallet4 = CasperLib.init({ privateKey: privateKey4 })
+    wallet5 = CasperLib.init({ privateKey: privateKey5 })
+    wallet6 = CasperLib.init({ privateKey: privateKey6 })
   } else {
-    wallet1 = await CasperLib.init({})
-    wallet2 = await CasperLib.init({})
-    wallet3 = await CasperLib.init({})
-    wallet4 = await CasperLib.init({})
-    wallet5 = await CasperLib.init({})
-    wallet6 = await CasperLib.init({})
+    wallet1 = CasperLib.init({})
+    wallet2 = CasperLib.init({})
+    wallet3 = CasperLib.init({})
+    wallet4 = CasperLib.init({})
+    wallet5 = CasperLib.init({})
+    wallet6 = CasperLib.init({})
 
     // Don't store mnemonic in local storage in a production project!
     localStorage.setItem('CASPER_PRIVATE_KEY_1', wallet1.getPrivKey())
@@ -51,12 +51,12 @@ export async function createOrRestoreCasperWallet() {
     localStorage.setItem('CASPER_PRIVATE_KEY_6', wallet6.getPrivKey())
   }
 
-  address1 = await wallet1.getAddress()
-  address2 = await wallet2.getAddress()
-  address3 = await wallet3.getAddress()
-  address4 = await wallet4.getAddress()
-  address5 = await wallet5.getAddress()
-  address6 = await wallet6.getAddress()
+  address1 = wallet1.getAddress()
+  address2 = wallet2.getAddress()
+  address3 = wallet3.getAddress()
+  address4 = wallet4.getAddress()
+  address5 = wallet5.getAddress()
+  address6 = wallet6.getAddress()
 
   casperWallets = {
     [address1]: wallet1,

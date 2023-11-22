@@ -1,82 +1,38 @@
 import AccountCard from '@/components/AccountCard'
 import AccountPicker from '@/components/AccountPicker'
 import PageHeader from '@/components/PageHeader'
-import { EIP155_MAINNET_CHAINS, EIP155_TEST_CHAINS } from '@/data/EIP155Data'
 import SettingsStore from '@/store/SettingsStore'
-import { Text } from '@nextui-org/react'
-import { Fragment } from 'react'
-import { useSnapshot } from 'valtio'
-import { CASPER_MAINNET_CHAIN, CASPER_TEST_CHAIN } from '@/data/CASPERData'
+import {Text} from '@nextui-org/react'
+import {Fragment} from 'react'
+import {useSnapshot} from 'valtio'
+import {CASPER_MAINNET_CHAIN, CASPER_TEST_CHAIN} from '@/data/CASPERData'
+import {createOrRestoreCasperWallet} from "@/utils/CasperWalletUtil";
 
 export default function HomePage() {
-  const {
-    testNets,
-    eip155Address,
-    casperAddress
-  } = useSnapshot(SettingsStore.state)
+    const {
+        testNets,
+        casperAddress
+    } = useSnapshot(SettingsStore.state)
 
-  return (
-    <Fragment>
-      <PageHeader title="Accounts">
-        <AccountPicker data-testid="account-picker" />
-      </PageHeader>
-      <Text h4 css={{ marginBottom: '$5' }}>
-        Mainnets
-      </Text>
-      {Object.entries(EIP155_MAINNET_CHAINS).map(([caip10, { name, logo, rgb }]) => (
-        <AccountCard
-          key={name}
-          name={name}
-          logo={logo}
-          rgb={rgb}
-          address={eip155Address}
-          chainId={caip10.toString()}
-          data-testid={'chain-card-' + caip10.toString()}
-        />
-      ))}
+    const {casperAddresses} = createOrRestoreCasperWallet()
 
-      {Object.entries(CASPER_MAINNET_CHAIN).map(([caip10, { name, logo, rgb }]) => (
-        <AccountCard
-          key={name}
-          name={name}
-          logo={logo}
-          rgb={rgb}
-          address={casperAddress}
-          chainId={caip10}
-          data-testid={'chain-card-' + caip10.toString()}
-        />
-      ))}
-
-      {testNets ? (
+    return (
         <Fragment>
-          <Text h4 css={{ marginBottom: '$5' }}>
-            Testnets
-          </Text>
-          {Object.entries(EIP155_TEST_CHAINS).map(([caip10, { name, logo, rgb }]) => (
-            <AccountCard
-              key={name}
-              name={name}
-              logo={logo}
-              rgb={rgb}
-              address={eip155Address}
-              chainId={caip10.toString()}
-              data-testid={'chain-card-' + caip10.toString()}
-            />
-          ))}
-
-          {Object.entries(CASPER_TEST_CHAIN).map(([caip10, { name, logo, rgb }]) => (
-            <AccountCard
-              key={name}
-              name={name}
-              logo={logo}
-              rgb={rgb}
-              address={casperAddress}
-              chainId={caip10}
-              data-testid={'chain-card-' + caip10.toString()}
-            />
-          ))}
+            <PageHeader title="Accounts">
+            </PageHeader>
+            {Object.entries(CASPER_MAINNET_CHAIN).map(([caip10, {name, logo, rgb}]) => (
+                casperAddresses.map(address =>
+                    <AccountCard
+                        key={name}
+                        name={name}
+                        logo={logo}
+                        rgb={rgb}
+                        address={address}
+                        chainId={caip10}
+                        data-testid={'chain-card-' + caip10.toString()}
+                    />
+                )
+            ))}
         </Fragment>
-      ) : null}
-    </Fragment>
-  )
+    )
 }

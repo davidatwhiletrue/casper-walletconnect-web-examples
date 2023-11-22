@@ -27,11 +27,11 @@ export default function AccountSelectCard({ address, selected, index, onSelect, 
       }}
       data-testid={`account-select-card-${isRequired ? 'req' : 'opt'}-${index + 1}`}
     >
-      <Row justify="space-between" align="center">        
+      <Row justify="flex-start" align="center" >
         <Checkbox size="lg" color="success" checked={selected}/>                  
 
-        <Text data-testid={`account-select-text-${index + 1}`}>
-          {`${truncate(address, 14)} - Account ${index + 1}`}
+        <Text data-testid={`account-select-text-${index + 1}`} css={{marginLeft: '16px'}}>
+          {`Account ${index + 1} - ${truncate(address, 14).toLowerCase()}`}
         </Text>
       </Row>
     </Card>

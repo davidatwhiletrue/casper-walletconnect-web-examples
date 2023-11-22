@@ -14,7 +14,7 @@ export default function useInitialization() {
   const onInitialize = useCallback(async () => {
     try {
       const { eip155Addresses } = createOrRestoreEIP155Wallet()
-      const { casperAddresses } = await createOrRestoreCasperWallet()
+      const { casperAddresses } = createOrRestoreCasperWallet()
 
       SettingsStore.setEIP155Address(eip155Addresses[0])
       SettingsStore.setCasperAddress(casperAddresses[0])
