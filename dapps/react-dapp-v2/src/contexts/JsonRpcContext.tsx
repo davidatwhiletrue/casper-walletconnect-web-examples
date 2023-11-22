@@ -76,7 +76,7 @@ export function JsonRpcContextProvider({
   const [result, setResult] = useState<IFormattedRpcResponse | null>();
   const [isTestnet, setIsTestnet] = useState(getLocalStorageTestnetFlag());
 
-  const { client, session, accounts, balances, solanaPublicKeys } =
+  const { client, session, accounts, balances } =
     useWalletConnectClient();
 
   const { chainData } = useChainData();

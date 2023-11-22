@@ -7,10 +7,10 @@ export async function createSignClient(relayerRegionURL: string) {
     projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
     relayUrl: relayerRegionURL ?? process.env.NEXT_PUBLIC_RELAY_URL,
     metadata: {
-      name: 'WC Demo wallet 1 for Casper',
-      description: 'Casper Demo Wallet 1 for WalletConnect',
-      url: 'https://walletconnect.com/',
-      icons: ['http://david.whiletrue.pro/click-logo-rev.png']
+      name: process.env.NEXT_PUBLIC_WALLET_METADATA_NAME || 'WC Demo wallet 1 for Casper',
+      description: process.env.NEXT_PUBLIC_WALLET_METADATA_DESCRIPTION || 'Casper Demo Wallet 1 for WalletConnect',
+      url: process.env.NEXT_PUBLIC_WALLET_METADATA_URL || 'https://walletconnect.com/',
+      icons: [process.env.NEXT_PUBLIC_WALLET_METADATA_ICON || 'http://david.whiletrue.pro/click-logo-rev.png']
     }
   })
 

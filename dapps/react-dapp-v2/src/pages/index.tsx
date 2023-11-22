@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import React, { useEffect, useRef, useState } from "react";
-
 import Banner from "../components/Banner";
 import Blockchain from "../components/Blockchain";
 import Column from "../components/Column";

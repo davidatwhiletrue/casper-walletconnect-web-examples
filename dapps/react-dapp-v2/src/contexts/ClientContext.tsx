@@ -60,6 +60,11 @@ const web3Modal = new Web3Modal({
   projectId: DEFAULT_PROJECT_ID,
   themeMode: "light",
   walletConnectVersion: 2,
+  enableAuthMode: false,
+  termsOfServiceUrl: 'https://cspr.click/tos',
+  privacyPolicyUrl: 'https://cspr.click/privacy',
+  // enableExplorer: false,
+  explorerRecommendedWalletIds: 'NONE'
 });
 
 /**
@@ -146,19 +151,11 @@ export function ClientContextProvider({
           "requiredNamespaces config for connect:",
           requiredNamespaces
         );
-        // const requiredNamespaces = {
-        //   casper: {
-        //     methods: ["casper_sign_message", "casper_sign_deploy"],
-        //     chains: ["casper:casper-test"],
-        //     events: [],
-        //   },
-        // };
         const optionalNamespaces = getOptionalNamespaces(chains);
         console.log(
           "optionalNamespaces config for connect:",
           optionalNamespaces
         );
-        // const optionalNamespaces = requiredNamespaces;
         const { uri, approval } = await client.connect({
           pairingTopic: pairing?.topic,
           requiredNamespaces,
@@ -171,7 +168,7 @@ export function ClientContextProvider({
           const standaloneChains = Object.values(requiredNamespaces)
             .map((namespace) => namespace.chains)
             .flat() as string[];
-
+          console.log("URI", uri);
           web3Modal.openModal({ uri, standaloneChains });
         }
 
