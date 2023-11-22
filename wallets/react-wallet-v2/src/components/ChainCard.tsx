@@ -18,7 +18,8 @@ export default function ChainCard({ rgb, children, flexDirection, alignItems }: 
         boxShadow: `0 0 10px 0 rgba(${rgb}, 0.15)`,
         backgroundColor: `rgba(${rgb}, 0.25)`,
         marginBottom: '$6',
-        minHeight: '70px'
+        minHeight: '70px',
+          borderRadius: '2px',
       }}
     >
       <Card.Body

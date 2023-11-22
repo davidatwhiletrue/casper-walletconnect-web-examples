@@ -60,26 +60,8 @@ export default function SettingsPage() {
 
       <Divider y={2} />
 
-      <Text css={{ color: '$yellow500', marginBottom: '$5', textAlign: 'left', padding: 0 }}>
-        Warning: mnemonics and secret keys are provided for development purposes only and should not
-        be used elsewhere!
-      </Text>
 
-      <Text h4 css={{ marginTop: '$5', marginBottom: '$5' }}>
-        EIP155 Mnemonic
-      </Text>
-      <Card bordered borderWeight="light" css={{ minHeight: '100px' }}>
-        <Text css={{ fontFamily: '$mono' }}>{eip155Wallets[eip155Address].getMnemonic()}</Text>
-      </Card>
 
-      <Text h4 css={{ marginTop: '$10', marginBottom: '$5' }}>
-        Casper Secp256k1 Private Key
-      </Text>
-      <Card bordered borderWeight="light" css={{ wordWrap: 'break-word' }}>
-        <Text css={{ fontFamily: '$mono' }}>{casperWallets[casperAddress].getPrivKey()}</Text>
-      </Card>
-
-      <Text h4 css={{ marginTop: '$10', marginBottom: '$5' }}></Text>
     </Fragment>
   )
 }

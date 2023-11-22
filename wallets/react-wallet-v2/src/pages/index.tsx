@@ -20,6 +20,7 @@ export default function HomePage() {
         <Fragment>
             <PageHeader title="Accounts">
             </PageHeader>
+
             {Object.entries(CASPER_MAINNET_CHAIN).map(([caip10, {name, logo, rgb}]) => (
                 casperAddresses.map(address =>
                     <AccountCard
@@ -33,6 +34,10 @@ export default function HomePage() {
                     />
                 )
             ))}
+            <Text css={{ color: '', marginTop: '$10', textAlign: 'left', padding: 0 }}>
+                Warning: these accounts are provided for development purposes only. Do not use them to store any
+                valuable assets!
+            </Text>
         </Fragment>
     )
 }

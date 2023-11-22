@@ -11,7 +11,7 @@ export const CASPER_MAINNET_CHAIN = {
     chainId: 'casper',
     name: 'Casper',
     logo: '/chain-logos/casper.png',
-    rgb: '99, 125, 234',
+    rgb: '185, 187, 191',
     rpc: 'https://limitless-fortress-93850-88d6ee7d4a49.herokuapp.com/http://52.35.59.254:7777/rpc'
   }
 }

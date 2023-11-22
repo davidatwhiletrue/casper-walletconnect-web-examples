@@ -46,7 +46,7 @@ export default function WalletConnectPage() {
             disabled={!uri}
             css={{ marginLeft: -60 }}
             onClick={() => onConnect(uri)}
-            color="gradient"
+            color="primary"
             data-testid="uri-connect-button"
           >
             {loading ? <Loading size="sm" /> : 'Connect'}
